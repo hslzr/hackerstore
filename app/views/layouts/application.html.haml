@@ -6,12 +6,51 @@
     %title Hackerstore
     %link{:href => "http://yui.yahooapis.com/pure/0.6.0/pure-min.css", :rel => "stylesheet"}/
     /[if lte IE 8]
-      <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-old-ie-min.css">
-    / [if gt IE 8]><!
+    %link{:href => "http://yui.yahooapis.com/pure/0.6.0/grids-responsive-old-ie-min.css", :rel => "stylesheet"}
+    / [if gt IE 8]>!
     %link{:href => "http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css", :rel => "stylesheet"}/
-    / <![endif]
+    / ![endif]
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
-    = yield
+    .custom-menu-wrapper
+      .pure-menu.custom-menu.custom-menu-top
+        %a.pure-menu-heading.custom-menu-brand{:href => "#"} Brand
+        %a#toggle.custom-menu-toggle{:href => "#"}
+          %s.bar
+          %s.bar
+      #tuckedMenu.pure-menu.pure-menu-horizontal.pure-menu-scrollable.custom-menu.custom-menu-bottom.custom-menu-tucked
+        .custom-menu-screen
+        %ul.pure-menu-list
+          %li.pure-menu-item
+            %a.pure-menu-link{:href => "#"} Home
+          %li.pure-menu-item
+            %a.pure-menu-link{:href => "#"} About
+          %li.pure-menu-item
+            %a.pure-menu-link{:href => "#"} Contact
+          %li.pure-menu-item
+            %a.pure-menu-link{:href => "#"} Blog
+          %li.pure-menu-item
+            %a.pure-menu-link{:href => "#"} GitHub
+          %li.pure-menu-item
+            %a.pure-menu-link{:href => "#"} Twitter
+          %li.pure-menu-item
+            %a.pure-menu-link{:href => "#"} Apple
+          %li.pure-menu-item
+            %a.pure-menu-link{:href => "#"} Google
+          %li.pure-menu-item
+            %a.pure-menu-link{:href => "#"} Wang
+          %li.pure-menu-item
+            %a.pure-menu-link{:href => "#"} Yahoo
+          %li.pure-menu-item
+            %a.pure-menu-link{:href => "#"} W3C
+    :javascript
+      (function (window, document) {
+      document.getElementById('toggle').addEventListener('click', function (e) {
+          document.getElementById('tuckedMenu').classList.toggle('custom-menu-tucked');
+          document.getElementById('toggle').classList.toggle('x');
+      });
+      })(this, this.document);
+    .main
+      = yield
